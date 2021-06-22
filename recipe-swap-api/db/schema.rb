@@ -10,11 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_21_204411) do
+ActiveRecord::Schema.define(version: 2021_06_21_211850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "collector_favorites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "collector_id", null: false
+    t.uuid "favorite_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["collector_id"], name: "index_collector_favorites_on_collector_id"
+    t.index ["favorite_id"], name: "index_collector_favorites_on_favorite_id"
+  end
 
   create_table "recipes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
@@ -23,8 +32,10 @@ ActiveRecord::Schema.define(version: 2021_06_21_204411) do
     t.text "instructions"
     t.integer "servings"
     t.uuid "user_id", null: false
+    t.uuid "original_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["original_id"], name: "index_recipes_on_original_id"
     t.index ["user_id"], name: "index_recipes_on_user_id"
   end
 
@@ -37,5 +48,8 @@ ActiveRecord::Schema.define(version: 2021_06_21_204411) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "collector_favorites", "recipes", column: "favorite_id"
+  add_foreign_key "collector_favorites", "users", column: "collector_id"
+  add_foreign_key "recipes", "recipes", column: "original_id"
   add_foreign_key "recipes", "users"
 end
