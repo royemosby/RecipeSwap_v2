@@ -39,7 +39,7 @@ class ApplicationController < ActionController::API
 
 
   def authenticate
-    render json: {message: 'Please log in'}, status: unauthorized unless logged_in?
+    render json: {message: 'Please log in'}, status: unauthorized unless logged_on?
   end
 
   #TODO: Should I do authorization in the app controller too?
