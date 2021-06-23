@@ -23,20 +23,35 @@ class UsersController < ApplicationController
     end
     
   end
-    #TODO: update, destroy
+    #TODO: validate update, destroy
   def update
-
+    if is_own_user?
+      @user.update(user_params)
+      render json: @user
+    else
+      render json: {error: 'not authorized to modify this user'}, status: :unauthorized
+    end
   end
 
   def destroy
+    if is_own_user?
+      @user.destroy
+      render json: {success: 'user has been removed'}
+    else
+      render json: {error: 'not authorized to modify this user'}, status: :unauthorized
+    end
+  end
 
+  def is_own_user?
+    @user = User.find_by(id: params[:id])
+    @user && @user == current_user
   end
 
   def create_params
     params.require(:user).permit(:username, :password)
   end
 
-  def job_params
+  def user_params
     params.require(:user).permit(:id, :username, :password, :about, :profile_image)
   end
 end
