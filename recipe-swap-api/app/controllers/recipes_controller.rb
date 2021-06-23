@@ -24,7 +24,6 @@ class RecipesController < ApplicationController
     end
     
   end
-
   
   def destroy
     if recipe_belongs_to_user?
