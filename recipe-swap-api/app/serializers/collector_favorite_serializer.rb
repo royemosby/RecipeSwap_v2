@@ -1,5 +1,5 @@
 class CollectorFavoriteSerializer < ActiveModel::Serializer
   attributes :id
-  has_one :user
-  has_one :recipe
+  belongs_to :collector, class_name: "User"
+  belongs_to :favorite, class_name: "Recipe"
 end
