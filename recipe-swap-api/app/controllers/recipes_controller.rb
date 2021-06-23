@@ -12,9 +12,25 @@ class RecipesController < ApplicationController
     render json: @recipe
   end
 
-  # TODO: create recipe
+  # creates spinnoff when has params[:id]
   def create
-    #if recipe_id provided, create a spinoff, else create new
+    user = current_user
+    if params[:id]
+      @recipe = Recipe.new(name: params[:name],
+        description: params[:description],
+        ingredients: params[:indredients],
+        instructions: params[:instructions],
+        servings: params[:servings],
+        original_id: params[:id])
+    else
+      @recipe = Recipe.new(recipe_params)
+    end
+      user.recipes << @recipe
+    if user.save
+      render json: @recipe, status: :created
+    else
+      render json: {error: "something went wrong"}
+    end
   end
 
   def update
