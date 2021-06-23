@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     end
     
   end
-    #TODO: validate update, destroy
+    
   def update
     if is_own_user?
       @user.update(user_params)
