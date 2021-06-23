@@ -10,9 +10,11 @@ class RecipesController < ApplicationController
     render json: @recipe
   end
 
+  # TODO: create recipe
   def create
-
+    #if recipe_id provided, create a spinoff, else create new
   end
+
   def update
     if recipe_belongs_to_user?
       @recipe.update(recipe_params)
@@ -22,8 +24,8 @@ class RecipesController < ApplicationController
     end
     
   end
+
   
-  # TODO: validate destroy
   def destroy
     if recipe_belongs_to_user?
       @recipe.destroy
