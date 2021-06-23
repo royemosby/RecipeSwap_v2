@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 
-  # TODO: add index, show to skip_before_action after auth testing
-  skip_before_action :authenticate, only: [:create]
+  skip_before_action :authenticate, only: [:index, :show, :create]
 
   def index
     @users = User.all
