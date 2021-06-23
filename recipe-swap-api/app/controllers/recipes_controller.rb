@@ -13,16 +13,32 @@ class RecipesController < ApplicationController
   def create
 
   end
-
   def update
-
+    if recipe_belongs_to_user?
+      @recipe.update(recipe_params)
+      render json: @recipe
+    else
+      render json: {error: 'not authorized to modify this recipe'}, status: :unauthorized
+    end
+    
+  end
+  
+  # TODO: validate destroy
+  def destroy
+    if recipe_belongs_to_user?
+      @recipe.destroy
+      render json: {success: 'recipe has been removed'}
+    else
+      render json: {error: 'not authorized to modify this recipe'}, status: :unauthorized
+    end
   end
 
-  def destroy
-
+  def recipe_belongs_to_user?
+    @recipe = Recipe.find_by(id: params[:id])
+    @recipe && @recipe.user == current_user
   end
 
   def recipe_params
-    params.require(:recipe).permit(:name, :description, :ingredients, :instructions, :servings, :user_id, :original_id)
+    params.require(:recipe).permit(:id, :name, :description, :ingredients, :instructions, :servings, :user_id, :original_id)
   end
 end
