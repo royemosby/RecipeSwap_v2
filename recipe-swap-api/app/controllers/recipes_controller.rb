@@ -1,5 +1,7 @@
 class RecipesController < ApplicationController
 
+  skip_before_action :authenticate, only: [:index, :show]
+
   def index
     @recipes = Recipe.all
     render json: @recipes
