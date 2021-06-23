@@ -42,8 +42,4 @@ class ApplicationController < ActionController::API
     render json: {message: 'Please log in'}, status: :unauthorized unless logged_on?
   end
 
-  #TODO: Should I do authorization in the app controller too?
-  ## all authenticated users create recipes, spinoffs, favorites
-  ## current_user only able to mod own profile, recipes, favorites
-
 end
