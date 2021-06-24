@@ -1,6 +1,5 @@
 class CollectorFavoritesController < ApplicationController
 
-  #TODO: validate destroy actions
   def index
     user_id = current_user.id
     @collector_favorites = CollectorFavorite.where("collector_id = ?", user_id)
@@ -25,10 +24,8 @@ class CollectorFavoritesController < ApplicationController
     end
   end
 
-  #TODO: make proper!
   def destroy
     @favorite = CollectorFavorite.find_by(id: params[:id])
-    #byebug
     if @favorite && @favorite.collector == current_user
       @favorite.destroy
       render json: {message: 'favorite has been removed'}
