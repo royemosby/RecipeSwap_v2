@@ -1,8 +1,7 @@
 const blanko = {
-  id: "kkkkkkkk=llll-mmmm-nnnn-oooooooooooo",
-  collector_id: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
-  favorite_id: "ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj",
-  created_at: "2021-06-23 02:11:21.277415000 +0000"
+  id: "fav1_id",
+  collector_id: "id_blanco",
+  favorite_id: "id_potted_placeholder",
 }
 
 /* EXPECTED ACTIONS

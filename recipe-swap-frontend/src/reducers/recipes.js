@@ -1,12 +1,33 @@
-const blanko = {
+const recipe1 = {
   name: "Fried filler",
-  id: "ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj",
-  description: "this is a filler recipe injected into stor from reduceRecipes",
+  id: "id_fried_filler",
+  description: "this is a filler(#1) recipe injected into stor from reduceRecipes",
   ingredients: "dummy data, redux, react",
   instructions: "throw it against the wall and see if it sticks",
   servings: 42,
-  created_at: "2021-06-23 20:44:22.833657000 +0000",
-  user_id: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+  user_id: "id_blanco",
+  original_id: null
+}
+
+const recipe2 = {
+  name: "Potted placeholder",
+  id: "id_potted_placeholder",
+  description: "this is a filler(#2) recipe injected into store from reduceRecipes",
+  ingredients: "dummy data, redux, react",
+  instructions: "stick it in a pot. Water.It may grow.",
+  servings: 3,
+  user_id: "id_stanko",
+  original_id: null
+}
+
+const recipe3 = {
+  name: "Braised boilerplate",
+  id: "id_braised_boilerplate",
+  description: "this is a filler(#3) recipe injected into store from reduceRecipes",
+  ingredients: "dummy data, redux, react",
+  instructions: "stick it in a pot. Water.It may grow.",
+  servings: 1,
+  user_id: "id_stanko",
   original_id: null
 }
 
@@ -17,7 +38,7 @@ const blanko = {
   DELETE_RECIPE
 */
 
-function recipes(state = [blanko], action){
+function recipes(state = [recipe1,recipe2, recipe3], action){
   return state
 }
 

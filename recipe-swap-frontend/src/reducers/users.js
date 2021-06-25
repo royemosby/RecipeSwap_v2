@@ -1,8 +1,13 @@
-const blanko = {
+const user1 = {
   username: "Blanko",
-  id: 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee',
-  created_at: "2021-06-23 02:11:20.614061000 +0000",
-  about: 'this is a user injected directly into users reducer'
+  id: 'id_blanco',
+  about: 'this is a user(1) injected directly into users reducer'
+}
+
+const user2 = {
+  username: "Stanko",
+  id: 'id_stanko',
+  about: 'this is a user(2) injected directly into users reducer'
 }
 
 /* EXPECTED ACTIONS
@@ -12,7 +17,7 @@ const blanko = {
   DELETE_USER
 */
 
-function users(state = [blanko], action){
+function users(state = [user1, user2], action){
   return state
 }
 
