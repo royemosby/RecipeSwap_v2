@@ -8,12 +8,20 @@ import UsersContainer from './users/UsersContainer';
 import UserContainer from './users/UserContainer';
 import Header from './common/Header'
 import Footer from './common/Footer'
+import AuthModal from './common/AuthModal'
+import {connect} from 'react-redux'
 
-function App() {
+const renderAuthModal = (props) => {
+    if(props.loginModalOpen){
+      return <AuthModal/>
+    }
+  }
+
+function App(props) {
   return (
-    <div>
+    <div id="appWrapper">
       <Router>
-        <div id="appWrapper">
+        <div>
           <Header/>
           <Route exact path="/" component={MainContainer}/>
           <Route path="/recipe" component={RecipeContainer}/>
@@ -21,9 +29,16 @@ function App() {
           <Route path="/users" component={UsersContainer}/>
           <Footer/>
         </div>
+        {renderAuthModal(props)}
       </Router>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return{
+    loginModalOpen: state.currentUser.loginModalOpen
+  }
+}
+
+export default connect(mapStateToProps)(App);
