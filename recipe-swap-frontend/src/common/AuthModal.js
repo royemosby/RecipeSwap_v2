@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 
 class AuthModal extends Component{
 
@@ -27,6 +28,12 @@ class AuthModal extends Component{
     })
   }
 
+  closeLoginModal = evt =>{
+    evt.preventDefault();
+    this.props.closeLoginModal();
+  }
+  
+
   render(){
     return(
       <div className={["modal", "prez"].join(" ")}>
@@ -48,12 +55,23 @@ class AuthModal extends Component{
                       value={this.state.password} />
             </label>
           </div>
-          <input type="submit" value="Log on"/>
-          <button>or Sign Up</button>
+          <div>
+            <input type="submit" value="Log on"/>
+            <button>or Sign Up</button>
+          </div>
+          <div>
+            <button onClick={this.closeLoginModal}>Cancel</button>
+          </div>
         </form>
       </div>
     )
   }
 }
 
-export default AuthModal
+const mapDispatchToProps = (dispatch) => {
+  return({
+    closeLoginModal: () => dispatch({type: "CLOSE_LOGIN_MODAL"})
+  })
+}
+
+export default connect(null, mapDispatchToProps)(AuthModal)
