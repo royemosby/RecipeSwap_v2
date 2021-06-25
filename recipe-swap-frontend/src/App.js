@@ -11,17 +11,17 @@ import Footer from './common/Footer'
 
 function App() {
   return (
-    <div className="skeleton">
-      <Header/>
+    <div>
       <Router>
-        <div>
+        <div id="appWrapper">
+          <Header/>
           <Route exact path="/" component={MainContainer}/>
           <Route path="/recipe" component={RecipeContainer}/>
           <Route path="/user" component={UserContainer}/>
           <Route path="/users" component={UsersContainer}/>
+          <Footer/>
         </div>
       </Router>
-      <Footer/>
     </div>
   );
 }
