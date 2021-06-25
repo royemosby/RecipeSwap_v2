@@ -2,7 +2,7 @@ import React from 'react'
 
 const UserNav = () => {
   return (
-    <div>userNav</div>
+    <div className="prez">userNav</div>
   )
 }
 

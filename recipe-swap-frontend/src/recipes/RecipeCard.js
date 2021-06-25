@@ -2,7 +2,7 @@ import React from 'react'
 
 const recipeCard = () => {
   return (
-    <div>recipeCard</div>
+    <div className="prez">recipeCard</div>
   )
 }
 

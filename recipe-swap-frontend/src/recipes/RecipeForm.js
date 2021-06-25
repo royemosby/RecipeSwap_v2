@@ -2,7 +2,7 @@ import React from 'react'
 
 const recipeForm = () => {
   return (
-    <div>recipeForm</div>
+    <div className="prez">recipeForm</div>
   )
 }
 

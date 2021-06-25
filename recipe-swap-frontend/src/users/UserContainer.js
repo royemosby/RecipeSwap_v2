@@ -7,13 +7,13 @@ import EditModal from './EditModal'
 class UserContainer extends Component{
   render(){
     return(
-      <>
+      <div className="skeleton">
         <h1>UserContainer</h1>
         <UserNav/>
         <UserProfile/>
         <RecipesContainer/>
         <EditModal/>
-      </>
+      </div>
     )
   }
 }
