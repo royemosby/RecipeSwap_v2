@@ -1,14 +1,3 @@
-
-/* EXPECTED ACTIONS
-  SEND_CREDENTIALS
-  AUTHENTICATE
-  LOGOUT
-  CREATE_NEW_USER
-  UPDATE_PROFILE
-  OPEN_LOGIN_MODAL
-  CLOSE_LOGIN_MODAL
-*/
-
 const initialState = {
   id: "",
   token: "",
@@ -32,7 +21,6 @@ function currentUser(state = initialState, action){
     case "UPDATE_PW":
       return{...state, password: action.pw}
     case "SEND_CREDENTIALS":
-      console.log("sending credentials...")
       return {
         ...state,
         requesting: true
@@ -42,6 +30,7 @@ function currentUser(state = initialState, action){
         return{
           ...state,
           password: "",
+          requesting: false,
           loginError: action.response.message
         }
       } else {
@@ -58,6 +47,43 @@ function currentUser(state = initialState, action){
           requesting: false,
           loginError: ""
         }
+      }
+    case "SEND_CREATE_USER":
+      return {
+        ...state,
+        requesting: true
+      }
+    case "NEW_USER_DISPOSITION":
+      if(action.response.message){
+        console.dir(action.response)
+        //Rails sends message as object for validation errors
+        //TODO: reduce instead of for/in/concat
+        let message = ""
+        if (typeof(action.response.message) === "string"){
+          message = action.response.message
+        } else {
+          for (const field in action.response.message){
+            message = message.concat(`${field.toUpperCase()}: ${action.response.message[field].join(" | ")}. `)
+          }
+        }
+        return{
+          ...state,
+          password: "",
+          requesting: false,
+          loginError: message
+        }
+      } else {
+        return {
+          ...state,
+          id: action.response.user.id,
+          token: action.response.jwt,
+          username: action.response.user.username,
+          password: "", //let's not keep this
+          loginModalOpen: false,
+          requesting: false,
+          loginError: ""
+        }
+
       }
     case "LOG_OUT":
       return{
