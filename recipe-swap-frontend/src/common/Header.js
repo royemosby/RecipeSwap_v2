@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 
 
 const logInlogOut = (props) => {
-  const {token, activateLoginModal, logOut} = props
+  const {token, username, activateLoginModal, logOut} = props
   console.dir(token)
   if(props.token.length === 0){
     return(
@@ -17,13 +17,13 @@ const logInlogOut = (props) => {
   } else {
     return(
       <>
-      <NavLink to="/recipe"
+      <NavLink to="/recipes/new"
                   className="linky"
                   exact
                   activeStyle={{background: 'lightblue'}}>
         Create New Recipe </NavLink>
-      {/*TODO: make profile into users/{username}*/}
-      <NavLink to="/user"
+      {/*TODO: make profile into users/${username}*/}
+      <NavLink to={`/users/${username}`}
                   className="linky"
                   exact
                   activeStyle={{background: 'lightblue'}}>
@@ -40,8 +40,8 @@ const logInlogOut = (props) => {
 
 const Header = (props) => {
   return (
-    <div>
-      <h1 className="prez">Header</h1>
+    <div className="prez">
+      <h1>Header</h1>
       <nav>
         <NavLink to="/"
                   className="linky"
@@ -62,7 +62,8 @@ const Header = (props) => {
 
 const mapStateToProps = (state) => {
   return({
-    token: state.currentUser.token
+    token: state.currentUser.token,
+    username: state.currentUser.username
   })
 }
 
