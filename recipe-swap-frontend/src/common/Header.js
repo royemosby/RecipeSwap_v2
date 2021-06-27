@@ -3,6 +3,41 @@ import {NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
 
 
+const logInlogOut = (props) => {
+  const {token, activateLoginModal, logOut} = props
+  console.dir(token)
+  if(props.token.length === 0){
+    return(
+      <NavLink to="/"
+                  className="linky"
+                  onClick={activateLoginModal}
+                  exact>
+        Log in or Create Account </NavLink>
+    )
+  } else {
+    return(
+      <>
+      <NavLink to="/recipe"
+                  className="linky"
+                  exact
+                  activeStyle={{background: 'lightblue'}}>
+        Create New Recipe </NavLink>
+      {/*TODO: make profile into users/{username}*/}
+      <NavLink to="/user"
+                  className="linky"
+                  exact
+                  activeStyle={{background: 'lightblue'}}>
+        My Profile </NavLink>
+      <NavLink to="/"
+                  className="linky"
+                  onClick={logOut}
+                  exact>
+        Log Out </NavLink>
+        </>
+    )
+  }
+}
+
 const Header = (props) => {
   return (
     <div>
@@ -14,36 +49,29 @@ const Header = (props) => {
                   exact
                   activeStyle={{background: 'lightblue'}}>
         Home </NavLink>
-        <NavLink to="/recipe"
-                  className="linky"
-                  exact
-                  activeStyle={{background: 'lightblue'}}>
-        Recipe(hone w/params) </NavLink>
-        <NavLink to="/user"
-                  className="linky"
-                  exact
-                  activeStyle={{background: 'lightblue'}}>
-        User(hone w/params) </NavLink>
         <NavLink to="/users"
                   className="linky"
                   exact
                   activeStyle={{background: 'lightblue'}}>
         Users </NavLink>
-        <NavLink to="/"
-                  className="linky"
-                  onClick={props.activateLoginModal}
-                  exact>
-        Log in or Create Account </NavLink>
+        {logInlogOut(props)}
       </nav>
     </div>
   )
 }
 
-const mapDispatchToProps = (dispatch) =>{
+const mapStateToProps = (state) => {
   return({
-    activateLoginModal: () => dispatch({type: "OPEN_LOGIN_MODAL"}),
-    closeLoginModal: () => dispatch({type: "CLOSE_LOGIN_MODAL"})
+    token: state.currentUser.token
   })
 }
 
-export default connect(null, mapDispatchToProps)(Header)
+const mapDispatchToProps = (dispatch) =>{
+  return({
+    activateLoginModal: () => dispatch({type: "OPEN_LOGIN_MODAL"}),
+    closeLoginModal: () => dispatch({type: "CLOSE_LOGIN_MODAL"}),
+    logOut: () => dispatch({type: "LOG_OUT"})
+  })
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
