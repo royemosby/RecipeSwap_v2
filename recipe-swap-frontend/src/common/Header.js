@@ -5,8 +5,7 @@ import {connect} from 'react-redux'
 
 const logInlogOut = (props) => {
   const {token, username, activateLoginModal, logOut} = props
-  console.dir(token)
-  if(props.token.length === 0){
+  if(token.length === 0){
     return(
       <NavLink to="/"
                   className="linky"
@@ -29,7 +28,7 @@ const logInlogOut = (props) => {
                   activeStyle={{background: 'lightblue'}}>
         My Profile </NavLink>
       <NavLink to="/"
-                  className="linky"
+                  className={["linky", "logout"].join(" ")}
                   onClick={logOut}
                   exact>
         Log Out </NavLink>
