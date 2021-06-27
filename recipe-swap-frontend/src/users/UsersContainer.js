@@ -6,8 +6,8 @@ class UsersContainer extends Component{
 
   renderUserCards(users){
     return (
-      users.map(user => {
-        return <UserCard user={user}/>
+      users.map((user, idx) => {
+        return <UserCard key={idx} user={user}/>
       })
     )
   }
