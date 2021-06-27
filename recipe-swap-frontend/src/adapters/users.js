@@ -1,4 +1,5 @@
 import {url} from "./adapterConfig"
+import {store} from '../index'
 
 function getUsers(){
   fetch(`${url.users}`)
@@ -24,22 +25,22 @@ function createUser(credentials){
     })
 }
 
-//takes username, password
-//returns obj containing userObj + token
-function authenticateUser(credentials){
+const authenticateUser = () =>{
+  const currentUser = store.getState().currentUser
   const config = {
     method: "POST",
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     },
-    body: JSON.stringify(credentials)
+    body: JSON.stringify({username: currentUser.username, password: currentUser.password})
   }
-  fetch(`${url.login}`, config)
-    .then(resp => resp.json())
-    .then(json => {
-      console.dir(json)
-    })
+  return (dispatch) => {
+    dispatch({type: "SEND_CREDENTIALS"});
+    fetch(`${url.login}`, config)
+      .then(resp => resp.json())
+      .then(response => dispatch({type:"AUTHENTICATE", response}))
+  }
 }
 
 function updateUser(user, changes){
