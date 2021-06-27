@@ -10,7 +10,7 @@ const recipeCard = ({recipe}) => {
     <div className="prez"
     onClick={() => openRecipe(recipe.name)}
     >
-      <Link to={`/recipe/${recipe.id}`}>woof</Link>
+      <Link to={`/recipes/${recipe.id}`}>woof</Link>
 
       <div>{recipe.name} | Serves: {recipe.serves}</div>
 
