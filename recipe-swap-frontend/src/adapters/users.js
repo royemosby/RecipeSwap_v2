@@ -9,20 +9,22 @@ function getUsers(){
     })
 }
 
-function createUser(credentials){
+const createUser = () =>{
+  const currentUser = store.getState().currentUser
   const config = {
     method: "POST",
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     },
-    body: JSON.stringify(credentials)
+    body: JSON.stringify({username: currentUser.username, password: currentUser.password})
   }
-  fetch(`${url.users}/create`, config)
-    .then(resp => resp.json())
-    .then(json => {
-      console.dir(json)
-    })
+  return (dispatch) => {
+    dispatch({type: "SEND_CREATE_USER"});
+    fetch(`${url.users}`, config)
+      .then(resp => resp.json())
+      .then(response => dispatch({type:"NEW_USER_DISPOSITION", response}))
+  }
 }
 
 const authenticateUser = () =>{
