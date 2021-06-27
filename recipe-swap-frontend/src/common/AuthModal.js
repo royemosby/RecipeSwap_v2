@@ -17,8 +17,12 @@ class AuthModal extends Component{
   }
 
   handleSubmit = (evt) =>{
+    if(evt.target.id === "login"){
+      this.props.authenticateUser()
+    } else {
+      this.props.createUser()
+    }
     evt.preventDefault();
-    this.props.authenticateUser()
   }
 
   closeLoginModal = evt =>{
@@ -31,7 +35,7 @@ class AuthModal extends Component{
     return(
       <div className={["modal", "prez"].join(" ")}>
         <h2>AuthModal</h2>
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <div>
             <label>Username
               <input type="text"
@@ -49,8 +53,8 @@ class AuthModal extends Component{
             </label>
           </div>
           <div>
-            <input type="submit" value="Log on"/>
-            <button>or Sign Up</button>
+            <input onClick={this.handleSubmit}id="login" type="submit" value="Log in"/>
+            <button onClick={this.handleSubmit}id="signup">or Sign Up</button>
           </div>
           <div>
             <button onClick={this.closeLoginModal}>Cancel</button>
@@ -68,6 +72,7 @@ const mapDispatchToProps = (dispatch) => {
   return({
     closeLoginModal: () => dispatch({type: "CLOSE_LOGIN_MODAL"}),
     authenticateUser: () => dispatch(authenticateUser()),
+    createUser: () => dispatch(createUser()),
     updatePassword: (pw) => dispatch({type: "UPDATE_PW", pw}),
     updateUsername: (un) => dispatch({type: "UPDATE_UN", un})
   })
