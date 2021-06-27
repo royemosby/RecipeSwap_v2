@@ -55,7 +55,6 @@ function currentUser(state = initialState, action){
       }
     case "NEW_USER_DISPOSITION":
       if(action.response.message){
-        console.dir(action.response)
         //Rails sends message as object for validation errors
         //TODO: reduce instead of for/in/concat
         let message = ""
