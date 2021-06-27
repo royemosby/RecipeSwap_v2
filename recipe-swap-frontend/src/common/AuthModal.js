@@ -1,31 +1,24 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {createUser, authenticateUser} from '../adapters/users'
 
 class AuthModal extends Component{
 
-  constructor(props){
-    super(props)
-    this.state = {
-      username: "",
-      password: "",
-      login: true //TODO: toggle this to toggle back and forth
-    }             // between login and sign up. Use this to also
-  }               // determine the post route the adapter will use
-                  // login ? "auth#create" : "users#create"
+  handleSubmit = (evt) => {
+
+  }
 
   handleUpdate = (evt)=>{
-    this.setState({
-      [evt.target.className] : evt.target.value
-    })
+    if(evt.target.className === "username"){
+      this.props.updateUsername(evt.target.value)
+    } else if(evt.target.className === "password"){
+      this.props.updatePassword(evt.target.value)
+    }
   }
 
   handleSubmit = (evt) =>{
     evt.preventDefault();
-    //TODO: Redux and/or adapter wire-up
-    this.setState({
-      username: "",
-      password: "",
-    })
+    this.props.authenticateUser()
   }
 
   closeLoginModal = evt =>{
@@ -44,7 +37,7 @@ class AuthModal extends Component{
               <input type="text"
                       onChange={this.handleUpdate}
                       className="username"
-                      value={this.state.username}/>
+                      value={this.props.username}/>
             </label>
           </div>
           <div>
@@ -52,7 +45,7 @@ class AuthModal extends Component{
               <input type="password"
                       onChange={this.handleUpdate}
                       className="password"
-                      value={this.state.password} />
+                      value={this.props.password} />
             </label>
           </div>
           <div>
@@ -62,6 +55,9 @@ class AuthModal extends Component{
           <div>
             <button onClick={this.closeLoginModal}>Cancel</button>
           </div>
+          <div>
+            {this.props.errorMessage}
+          </div>
         </form>
       </div>
     )
@@ -70,8 +66,19 @@ class AuthModal extends Component{
 
 const mapDispatchToProps = (dispatch) => {
   return({
-    closeLoginModal: () => dispatch({type: "CLOSE_LOGIN_MODAL"})
+    closeLoginModal: () => dispatch({type: "CLOSE_LOGIN_MODAL"}),
+    authenticateUser: () => dispatch(authenticateUser()),
+    updatePassword: (pw) => dispatch({type: "UPDATE_PW", pw}),
+    updateUsername: (un) => dispatch({type: "UPDATE_UN", un})
   })
 }
 
-export default connect(null, mapDispatchToProps)(AuthModal)
+const mapStateToProps = (state) => {
+  return({
+    username: state.currentUser.username,
+    password: state.currentUser.password,
+    errorMessage: state.currentUser.loginError,
+  })
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthModal)
