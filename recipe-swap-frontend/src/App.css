@@ -41,6 +41,10 @@ html {
   background-color: rgb(215, 243, 252);
 }
 
+.logout {
+  background-color: rgb(255, 235, 145)
+}
+
 nav {
   display: flex;
   justify-content: center;
