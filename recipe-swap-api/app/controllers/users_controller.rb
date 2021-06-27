@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       @token = encode_token(user_id: @user.id)
       render json: {user: @user, jwt: @token}, status: :created
     else
-      render json: {error: 'failed to create user'}, status: :not_acceptable
+      render json: {message: 'failed to create user'}, status: :not_acceptable
     end
     
   end
@@ -29,16 +29,16 @@ class UsersController < ApplicationController
       @user.update(user_params)
       render json: @user
     else
-      render json: {error: 'not authorized to modify this user'}, status: :unauthorized
+      render json: {message: 'not authorized to modify this user'}, status: :unauthorized
     end
   end
 
   def destroy
     if is_own_user?
       @user.destroy
-      render json: {success: 'user has been removed'}
+      render json: {message: 'user has been removed'}, status: :no_content
     else
-      render json: {error: 'not authorized to modify this user'}, status: :unauthorized
+      render json: {message: 'not authorized to modify this user'}, status: :unauthorized
     end
   end
 

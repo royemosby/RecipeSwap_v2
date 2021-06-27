@@ -20,7 +20,7 @@ class CollectorFavoritesController < ApplicationController
       @favorite = CollectorFavorite.create(favorite_id: @recipe.id, collector_id: @user.id)
       render json: @favorite
     else
-      render json: {error: "Something went wrong"}
+      render json: {message: "Something went wrong"}
     end
   end
 
@@ -28,9 +28,9 @@ class CollectorFavoritesController < ApplicationController
     @favorite = CollectorFavorite.find_by(id: params[:id])
     if @favorite && @favorite.collector == current_user
       @favorite.destroy
-      render json: {message: 'favorite has been removed'}
+      render json: {message: 'favorite has been removed'}, status: :no_content
     else
-      render json: {error: "Something went wrong"}
+      render json: {message: "Something went wrong"}
     end
   end
 

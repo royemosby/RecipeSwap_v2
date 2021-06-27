@@ -29,7 +29,7 @@ class RecipesController < ApplicationController
     if user.save
       render json: @recipe, status: :created
     else
-      render json: {error: "something went wrong"}
+      render json: {message: "something went wrong"}
     end
   end
 
@@ -38,7 +38,7 @@ class RecipesController < ApplicationController
       @recipe.update(recipe_params)
       render json: @recipe
     else
-      render json: {error: 'not authorized to modify this recipe'}, status: :unauthorized
+      render json: {message: 'not authorized to modify this recipe'}, status: :unauthorized
     end
     
   end
@@ -48,7 +48,7 @@ class RecipesController < ApplicationController
       @recipe.destroy
       render json: {success: 'recipe has been removed'}
     else
-      render json: {error: 'not authorized to modify this recipe'}, status: :unauthorized
+      render json: {message: 'not authorized to modify this recipe'}, status: :unauthorized
     end
   end
 
