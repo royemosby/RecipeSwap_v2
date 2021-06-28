@@ -30,7 +30,7 @@ class UserContainer extends Component{
           <>
             <UserNav user={targetUser()}/>
             <UserProfile user={targetUser()}/>
-            <RecipesContainer user={targetUser()}/>
+            <RecipesContainer recipes={targetUser().recipes}/>
             <UserFavorites />
             <EditModal/>
           </>
@@ -39,7 +39,7 @@ class UserContainer extends Component{
         return (
           <>
             <UserProfile user={targetUser()}/>
-            <RecipesContainer user={targetUser()}/>
+            <RecipesContainer recipes={targetUser().recipes}/>
           </>
         )
       }

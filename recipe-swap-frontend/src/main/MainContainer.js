@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import RecipesContainer from '../recipes/RecipesContainer'
+import {connect} from 'react-redux'
 
 class mainContainer extends Component{
 
@@ -8,12 +9,16 @@ class mainContainer extends Component{
       <div className={["skeleton", "main-overflow"].join(" ")}>
         <h1>MainContainer</h1>
         
-        <RecipesContainer/>
+        <RecipesContainer recipes={this.props.recipes} />
       </div>
     )
   }
 }
 
+const mapStateToProps = (state) => {
+  return({
+    recipes: state.recipes 
+  })
+}
 
-
-export default mainContainer
+export default connect(mapStateToProps)(mainContainer)
