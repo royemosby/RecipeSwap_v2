@@ -1,8 +1,21 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const UserNav = () => {
+const UserNav = (props) => {
   return (
-    <div className="prez">userNav</div>
+    <div className="prez">
+      <nav>
+        <Link to="/recipes/new" className="linky">
+          New recipe
+        </Link>
+        <Link to="/users/new" className="linky">
+          Favorites(nope)
+        </Link>
+        <Link to="/users/:username/edit" className="linky">
+          Edit profile(nope)
+        </Link>
+      </nav>
+    </div>
   )
 }
 
