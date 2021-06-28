@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import UserCard from './UserCard'
+import UserCard from './components/UserCard'
 import {connect} from 'react-redux'
 
-class UsersContainer extends Component{
+class IndexUsers extends Component{
 
   renderUserCards(users){
     return (
@@ -14,7 +14,7 @@ class UsersContainer extends Component{
   render(){
     return(
       <div className="skeleton">
-        <h1>UsersContainer</h1>
+        <h1>IndexUsers</h1>
         {this.renderUserCards(this.props.users)}
       </div>
     )
@@ -27,4 +27,4 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default connect(mapStateToProps)(UsersContainer)
+export default connect(mapStateToProps)(IndexUsers)

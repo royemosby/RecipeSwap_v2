@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
-import UserFavorites from './UserFavorites'
-import UserNav from './UserNav'
-import UserProfile from './UserProfile'
+import UserFavorites from './components/UserFavorites'
+import UserNav from './components/UserNav'
+import UserProfile from './components/UserProfile'
 import IndexRecipes from '../recipes/IndexRecipes'
-import EditModal from './EditModal'
+import EditModal from './components/EditModal'
 import {connect} from 'react-redux'
 
-class UserContainer extends Component{
+class ShowUser extends Component{
   render(){
     
     const targetUser = () => {
@@ -62,4 +62,4 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default connect(mapStateToProps)(UserContainer)
+export default connect(mapStateToProps)(ShowUser)

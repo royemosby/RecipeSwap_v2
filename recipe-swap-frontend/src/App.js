@@ -4,8 +4,8 @@ import MainContainer from './main/MainContainer';
 import NewRecipe from './recipes/NewRecipe';
 import EditRecipe from './recipes/EditRecipe';
 import ShowRecipe from './recipes/ShowRecipe';
-import UsersContainer from './users/UsersContainer';
-import UserContainer from './users/UserContainer';
+import IndexUsers from './users/IndexUsers';
+import ShowUser from './users/ShowUser';
 import Header from './common/Header'
 import AuthModal from './common/AuthModal'
 import {connect} from 'react-redux'
@@ -24,8 +24,8 @@ function App(props) {
           <Header/>
           <Switch>
             <Route exact path="/" component={MainContainer}/>
-            <Route path="/users/:username" component={UserContainer}/>
-            <Route path="/users" component={UsersContainer}/>
+            <Route path="/users/:username" component={ShowUser}/>
+            <Route path="/users" component={IndexUsers}/>
             <Route path="/recipes/new" component={NewRecipe}/>
             <Route path="/recipes/:recipeId/edit" component={EditRecipe}/>
             <Route path="/recipes/:recipeId" component={ShowRecipe}/>
