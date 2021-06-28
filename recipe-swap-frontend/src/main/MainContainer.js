@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import RecipesContainer from '../recipes/RecipesContainer'
+import IndexRecipes from '../recipes/IndexRecipes'
 import {connect} from 'react-redux'
 
 class mainContainer extends Component{
@@ -9,7 +9,7 @@ class mainContainer extends Component{
       <div className={["skeleton", "main-overflow"].join(" ")}>
         <h1>MainContainer</h1>
         
-        <RecipesContainer recipes={this.props.recipes} />
+        <IndexRecipes recipes={this.props.recipes} />
       </div>
     )
   }
