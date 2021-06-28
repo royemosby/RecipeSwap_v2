@@ -11,6 +11,8 @@ html {
 #appWrapper {
   border: 10px solid rgb(95, 0, 95);
   height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto;
   display: grid;
   grid-template-rows: max-content auto max-content;
   padding: 5px;
