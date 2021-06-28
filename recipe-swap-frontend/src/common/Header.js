@@ -21,17 +21,19 @@ const logInlogOut = (props) => {
                   exact
                   activeStyle={{background: 'lightblue'}}>
         Create New Recipe </NavLink>
-      {/*TODO: make profile into users/${username}*/}
+
       <NavLink to={`/users/${username}`}
                   className="linky"
                   exact
                   activeStyle={{background: 'lightblue'}}>
         My Profile </NavLink>
+
       <NavLink to="/"
                   className={["linky", "logout"].join(" ")}
                   onClick={logOut}
                   exact>
         Log Out </NavLink>
+
         </>
     )
   }
@@ -40,7 +42,6 @@ const logInlogOut = (props) => {
 const Header = (props) => {
   return (
     <div className="prez">
-      <h1>Header</h1>
       <nav>
         <NavLink to="/"
                   className="linky"
@@ -48,11 +49,13 @@ const Header = (props) => {
                   exact
                   activeStyle={{background: 'lightblue'}}>
         Home </NavLink>
+
         <NavLink to="/users"
                   className="linky"
                   exact
                   activeStyle={{background: 'lightblue'}}>
         Users </NavLink>
+
         {logInlogOut(props)}
       </nav>
     </div>
@@ -62,7 +65,7 @@ const Header = (props) => {
 const mapStateToProps = (state) => {
   return({
     token: state.currentUser.token,
-    username: state.currentUser.username
+    username: state.currentUser.username,
   })
 }
 
