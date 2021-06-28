@@ -1,9 +1,9 @@
 import React from 'react'
 
-const recipeForm = () => {
+const RecipeForm = () => {
   return (
     <div className="prez">recipeForm</div>
   )
 }
 
-export default recipeForm
+export default RecipeForm
