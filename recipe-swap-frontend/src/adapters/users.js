@@ -1,5 +1,6 @@
 import {url} from "./adapterConfig"
 import {store} from '../index'
+import {batch} from 'react-redux'
 
 function getUsers(){
   fetch(`${url.users}`)
@@ -7,7 +8,7 @@ function getUsers(){
     .then(json => {
       console.dir(json)
     })
-}
+} 
 
 const createUser = () =>{
   const currentUser = store.getState().currentUser
@@ -21,9 +22,28 @@ const createUser = () =>{
   }
   return (dispatch) => {
     dispatch({type: "SEND_CREATE_USER"});
+
     fetch(`${url.users}`, config)
       .then(resp => resp.json())
-      .then(response => dispatch({type:"NEW_USER_DISPOSITION", response}))
+      .then(response => {
+        if(response.message){
+          let message = "";
+          if(typeof(response.message) === "string"){
+            message = response.message;
+          } else {
+            for(const field in response.message){
+              message = message.concat(`${field.toUpperCase()}: ${response.message[field].join(" | ")}. `)
+            }
+          }
+          dispatch({type:"NEW_USER_ERROR", message})
+        } else {
+          batch(()=>{
+            dispatch({type:"NEW_USER_SUCCESS", response})
+            dispatch({type: "ADD_USER", response})
+          })
+        }
+      })
+      
   }
 }
 

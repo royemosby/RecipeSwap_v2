@@ -6,6 +6,7 @@ const initialState = {
   recipes: [],
   favorites: [],
   loginModalOpen: false,
+  editModalOpen: false,
   requesting: false,
   loginError: ""
 }
@@ -34,7 +35,6 @@ function currentUser(state = initialState, action){
           loginError: action.response.message
         }
       } else {
-        console.dir(action.response)
         return{
           ...state,
           id: action.response.user.id,
@@ -53,36 +53,23 @@ function currentUser(state = initialState, action){
         ...state,
         requesting: true
       }
-    case "NEW_USER_DISPOSITION":
-      if(action.response.message){
-        //Rails sends message as object for validation errors
-        //TODO: reduce instead of for/in/concat
-        let message = ""
-        if (typeof(action.response.message) === "string"){
-          message = action.response.message
-        } else {
-          for (const field in action.response.message){
-            message = message.concat(`${field.toUpperCase()}: ${action.response.message[field].join(" | ")}. `)
-          }
-        }
-        return{
-          ...state,
-          password: "",
-          requesting: false,
-          loginError: message
-        }
-      } else {
-        return {
-          ...state,
-          id: action.response.user.id,
-          token: action.response.jwt,
-          username: action.response.user.username,
-          password: "", //let's not keep this
-          loginModalOpen: false,
-          requesting: false,
-          loginError: ""
-        }
-
+    case "NEW_USER_ERROR":
+      return{
+        ...state,
+        password: "",
+        requesting: false,
+        loginError: action.message
+      }
+    case "NEW_USER_SUCCESS":
+      return{
+        ...state,
+        id: action.response.user.id,
+        token: action.response.jwt,
+        username: action.response.user.username,
+        password: "", //let's not keep this
+        loginModalOpen: false,
+        requesting: false,
+        loginError: ""
       }
     case "LOG_OUT":
       return{
