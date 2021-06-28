@@ -24,11 +24,11 @@ function App(props) {
           <Header/>
           <Switch>
             <Route exact path="/" component={MainContainer}/>
-            <Route path="/recipes/new" component={NewRecipe}/>
-            <Route path="/recipes/:recipeId" component={ShowRecipe}/>
-            <Route path="/recipes/:recipeId/edit" component={EditRecipe}/>
             <Route path="/users/:username" component={UserContainer}/>
             <Route path="/users" component={UsersContainer}/>
+            <Route path="/recipes/new" component={NewRecipe}/>
+            <Route path="/recipes/:recipeId/edit" component={EditRecipe}/>
+            <Route path="/recipes/:recipeId" component={ShowRecipe}/>
           </Switch>
         </div>
         {renderAuthModal(props)}
