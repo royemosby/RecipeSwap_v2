@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import UserFavorites from './UserFavorites'
 import UserNav from './UserNav'
 import UserProfile from './UserProfile'
-import RecipesContainer from '../recipes/RecipesContainer'
+import IndexRecipes from '../recipes/IndexRecipes'
 import EditModal from './EditModal'
 import {connect} from 'react-redux'
 
@@ -30,7 +30,7 @@ class UserContainer extends Component{
           <>
             <UserNav user={targetUser()}/>
             <UserProfile user={targetUser()}/>
-            <RecipesContainer recipes={targetUser().recipes}/>
+            <IndexRecipes recipes={targetUser().recipes}/>
             <UserFavorites />
             <EditModal/>
           </>
@@ -39,7 +39,7 @@ class UserContainer extends Component{
         return (
           <>
             <UserProfile user={targetUser()}/>
-            <RecipesContainer recipes={targetUser().recipes}/>
+            <IndexRecipes recipes={targetUser().recipes}/>
           </>
         )
       }
