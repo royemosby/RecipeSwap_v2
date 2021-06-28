@@ -1,7 +1,9 @@
 import './App.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import MainContainer from './main/MainContainer';
-import RecipeContainer from './recipes/RecipeContainer';
+import NewRecipe from './recipes/NewRecipe';
+import EditRecipe from './recipes/EditRecipe';
+import ShowRecipe from './recipes/ShowRecipe';
 import UsersContainer from './users/UsersContainer';
 import UserContainer from './users/UserContainer';
 import Header from './common/Header'
@@ -22,8 +24,9 @@ function App(props) {
           <Header/>
           <Switch>
             <Route exact path="/" component={MainContainer}/>
-            <Route path="/recipes/new" component={RecipeContainer}/>
-            <Route path="/recipes/:recipeId" component={RecipeContainer}/>
+            <Route path="/recipes/new" component={NewRecipe}/>
+            <Route path="/recipes/:recipeId" component={ShowRecipe}/>
+            <Route path="/recipes/:recipeId/edit" component={EditRecipe}/>
             <Route path="/users/:username" component={UserContainer}/>
             <Route path="/users" component={UsersContainer}/>
           </Switch>
