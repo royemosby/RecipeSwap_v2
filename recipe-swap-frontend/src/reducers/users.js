@@ -18,7 +18,20 @@ const user2 = {
 */
 
 function users(state = [user1, user2], action){
-  return state
+  switch (action.type){
+    case "ADD_USER":
+      return(
+        state.concat(
+          {about: action.response.user.about,
+          username: action.response.user.username,
+          id: action.response.user.id,
+          profile_image: action.response.user.profile_image}
+        )
+      )
+    default:
+      return state
+  }
+
 }
 
 export {users}
