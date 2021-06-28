@@ -2,7 +2,7 @@ import React from 'react'
 
 const Toast = (props) => {
   return (
-    <div>
+    <div className="toast">
       <p>props.message</p>
     </div>
   )
