@@ -1,8 +1,12 @@
 import React from 'react'
 
-const UserProfile = () => {
+const UserProfile = (props) => {
+  console.log(props)
   return (
-    <div className="prez">userProfile</div>
+    <div className="prez">
+      <h2>About {props.user.username}</h2>
+      <p>{props.user.about}</p>
+    </div>
   )
 }
 
